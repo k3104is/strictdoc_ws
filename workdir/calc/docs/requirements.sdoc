@@ -5,87 +5,111 @@ VERSION: 1.1
 
 [REQUIREMENT]
 UID: CALC-STK-001
+TAGS: stakeholder-requirement
 TITLE: 利害関係者要求：四則演算の利用
 STATEMENT: 利用者は、コマンドラインから2つの数値に対する加算、減算、乗算、および除算を実行できることを求める。
+COMMENT: 検証方法：受入試験でadd、sub、mul、divをそれぞれ実行し、4種類すべてで期待した計算結果を得られることを確認する。
 
 [REQUIREMENT]
 UID: CALC-STK-002
+TAGS: stakeholder-requirement
 TITLE: 利害関係者要求：計算結果の確認
 STATEMENT: 利用者は、計算が成功した場合に、その結果を確認できることを求める。
+COMMENT: 検証方法：受入試験で正常な計算を実行し、利用者が標準出力から計算結果を確認できることを確認する。
 
 [REQUIREMENT]
 UID: CALC-STK-003
+TAGS: stakeholder-requirement
 TITLE: 利害関係者要求：異常の把握
 STATEMENT: 利用者は、入力または計算に問題がある場合に、処理が失敗したこととその理由を把握できることを求める。
+COMMENT: 検証方法：受入試験で不正入力、ゼロ除算、および結果のオーバーフローを発生させ、各場合で失敗理由を確認できることを確認する。
 
 [REQUIREMENT]
 UID: CALC-SYS-FUNC-001
+TAGS: system-requirement
 TITLE: システム要求：四則演算機能
 STATEMENT: システムは、演算子と2つのオペランドをコマンドライン引数として受け取り、加算、減算、乗算、および除算を実行しなければならない。
+COMMENT: 検証方法：システム試験でadd、sub、mul、divに正負および小数のオペランドを与え、指定した各演算の期待値と一致することを確認する。
 RELATIONS:
 - TYPE: Parent
   VALUE: CALC-STK-001
 
 [REQUIREMENT]
 UID: CALC-SYS-FUNC-002
+TAGS: system-requirement
 TITLE: システム要求：計算結果の提示
 STATEMENT: システムは、計算に成功した場合に数値結果を利用者へ提示し、成功を示して終了しなければならない。
+COMMENT: 検証方法：システム試験で正常な計算を実行し、数値結果が標準出力へ出力され、終了コードが0であることを確認する。
 RELATIONS:
 - TYPE: Parent
   VALUE: CALC-STK-002
 
 [REQUIREMENT]
 UID: CALC-SYS-ERR-001
+TAGS: system-requirement
 TITLE: システム要求：入力異常の通知
 STATEMENT: システムは、コマンドライン引数が処理できない場合に計算を実行せず、理由を利用者へ通知し、失敗を示して終了しなければならない。
+COMMENT: 検証方法：システム試験で引数不足、未対応演算子、および不正なオペランドを与え、計算結果が出力されず、理由が標準エラー出力へ出力され、終了コードが非0であることを確認する。
 RELATIONS:
 - TYPE: Parent
   VALUE: CALC-STK-003
 
 [REQUIREMENT]
 UID: CALC-SYS-ERR-002
+TAGS: system-requirement
 TITLE: システム要求：計算異常の通知
 STATEMENT: システムは、指定された演算を有限な数値結果として完了できない場合に結果を提示せず、理由を利用者へ通知し、失敗を示して終了しなければならない。
+COMMENT: 検証方法：システム試験でゼロ除算および結果のオーバーフローを発生させ、計算結果が出力されず、理由が標準エラー出力へ出力され、終了コードが非0であることを確認する。
 RELATIONS:
 - TYPE: Parent
   VALUE: CALC-STK-003
 
 [REQUIREMENT]
 UID: CALC-FUNC-001
+TAGS: software-requirement
 TITLE: ソフトウェア要求：四則演算
 STATEMENT: calcコマンドは、第1引数の演算子としてadd、sub、mul、divのいずれかを、第2引数と第3引数として2つのオペランドを受け取り、指定された演算を実行できなければならない。
+COMMENT: 検証方法：GoogleTestのCalculatorTest.SupportsAllOperationsを実行し、add、sub、mul、divの演算結果が期待値と一致することを確認する。
 RELATIONS:
 - TYPE: Parent
   VALUE: CALC-SYS-FUNC-001
 
 [REQUIREMENT]
 UID: CALC-FUNC-002
+TAGS: software-requirement
 TITLE: ソフトウェア要求：結果の出力
 STATEMENT: 計算に成功した場合、calcコマンドは数値結果と改行を標準出力へ出力し、終了コード0で終了しなければならない。
+COMMENT: 検証方法：GoogleTestのCliTest.PrintsCalculationResultを実行し、標準出力が期待する数値と改行に一致し、終了コードが0であることを確認する。
 RELATIONS:
 - TYPE: Parent
   VALUE: CALC-SYS-FUNC-002
 
 [REQUIREMENT]
 UID: CALC-ERR-001
+TAGS: software-requirement
 TITLE: ソフトウェア要求：コマンドライン引数の検証
 STATEMENT: calcコマンドは、引数の個数が3でない場合、演算子がadd、sub、mul、divのいずれでもない場合、またはオペランドが完全な有限数として解釈できない場合に入力を拒否し、説明メッセージを標準エラー出力へ出力して、非0の終了コードで終了しなければならない。
+COMMENT: 検証方法：GoogleTestのCliTest.RejectsWrongArgumentCount、CliTest.RejectsUnknownOperation、およびCliTest.RejectsInvalidOperandsを実行し、標準エラー出力と非0の終了コードを確認する。
 RELATIONS:
 - TYPE: Parent
   VALUE: CALC-SYS-ERR-001
 
 [REQUIREMENT]
 UID: CALC-ERR-002
+TAGS: software-requirement
 TITLE: ソフトウェア要求：ゼロ除算
 STATEMENT: calcコマンドは、正または負のゼロによる除算を拒否し、説明メッセージを標準エラー出力へ出力して、非0の終了コードで終了しなければならない。
+COMMENT: 検証方法：GoogleTestのCalculatorTest.RejectsDivisionByZeroおよびCliTest.ReportsDivisionByZeroを実行し、正負のゼロ除算が拒否され、説明メッセージと非0の終了コードが得られることを確認する。
 RELATIONS:
 - TYPE: Parent
   VALUE: CALC-SYS-ERR-002
 
 [REQUIREMENT]
 UID: CALC-ERR-003
+TAGS: software-requirement
 TITLE: ソフトウェア要求：非有限な演算結果
 STATEMENT: calcコマンドは、演算結果が有限数でない場合に計算を拒否し、説明メッセージを標準エラー出力へ出力して、非0の終了コードで終了しなければならない。
+COMMENT: 検証方法：GoogleTestのCliTest.RejectsOverflowingResultを実行し、非有限となる演算結果が拒否され、説明メッセージと非0の終了コードが得られることを確認する。
 RELATIONS:
 - TYPE: Parent
   VALUE: CALC-SYS-ERR-002
