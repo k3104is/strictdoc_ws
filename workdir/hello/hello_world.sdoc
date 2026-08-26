@@ -1,0 +1,21 @@
+[DOCUMENT]
+TITLE: StrictDoc
+
+[REQUIREMENT]
+UID: SDOC-HIGH-REQS-MANAGEMENT
+TITLE: Requirements management
+STATEMENT: >>>
+StrictDoc shall enable requirements management.
+test1
+<<<
+
+[REQUIREMENT]
+UID: REQ-1
+TITLE: Requirements management
+STATEMENT: >>>
+StrictDoc shall enable requirements management.
+test2
+<<<
+RELATIONS:
+- TYPE: Parent
+  VALUE: SDOC-HIGH-REQS-MANAGEMENT

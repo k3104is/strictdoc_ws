@@ -1,0 +1,22 @@
+services:
+  strictdoc:
+#    image: strictdoc/strictdoc:latest
+    build: .
+    image: i_strictdoc
+    container_name: c_strictdoc
+
+    environment:
+      HOST_UID: ${HOST_UID}
+      HOST_GID: ${HOST_GID}
+
+    volumes:
+      - ../workdir:/workdir
+    working_dir: /workdir
+
+#    ports:
+#      - "127.0.0.1:5111:5111"
+    network_mode: host
+    stdin_open: true
+    tty: true
+
+#    command: strictdoc server --host 0.0.0.0 --watch .
