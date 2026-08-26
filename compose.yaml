@@ -1,22 +1,60 @@
+x-build-common: &build-common
+  context: .
+  dockerfile: Dockerfile
+
+x-environment-common: &environment-common
+  HOST_UID: ${HOST_UID:-1000}
+  HOST_GID: ${HOST_GID:-1000}
+
+x-service-common: &service-common
+  environment:
+    <<: *environment-common
+
+  volumes:
+    - ./workdir:/workdir
+
+  working_dir: /workdir
+  stdin_open: true
+  tty: true
+  network_mode: host
+
 services:
-  strictdoc:
-#    image: strictdoc/strictdoc:latest
-    build: .
-    image: i_strictdoc
-    container_name: c_strictdoc
+
+  cppdev:
+    <<: *service-common
+
+    build:
+      <<: *build-common
+      target: cppdev
+
+    image: i_cppdev
+    container_name: c_cppdev
+
+
+  strictdoc_cppdev:
+    <<: *service-common
+
+    build:
+      <<: *build-common
+      target: strictdoc_cppdev
+
+    image: i_strictdoc_cppdev
+    container_name: c_strictdoc_cppdev
+
+  codex_strictdoc_cppdev:
+    <<: *service-common
+
+    build:
+      <<: *build-common
+      target: codex_strictdoc_cppdev
+
+    image: i_codex_strictdoc_cppdev
+    container_name: c_codex_strictdoc_cppdev
 
     environment:
-      HOST_UID: ${HOST_UID}
-      HOST_GID: ${HOST_GID}
+      <<: *environment-common
+      CODEX_HOME: /codex
 
     volumes:
-      - ../workdir:/workdir
-    working_dir: /workdir
-
-#    ports:
-#      - "127.0.0.1:5111:5111"
-    network_mode: host
-    stdin_open: true
-    tty: true
-
-#    command: strictdoc server --host 0.0.0.0 --watch .
+      - ./workdir:/workdir
+      - ${HOME}/.codex-strictdoc:/codex
