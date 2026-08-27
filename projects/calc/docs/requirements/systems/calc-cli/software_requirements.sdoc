@@ -1,0 +1,55 @@
+[DOCUMENT]
+TITLE: calc CLI ソフトウェア要求仕様
+UID: CALC-CLI-SW-REQS
+VERSION: 1.1
+
+[REQUIREMENT]
+UID: CALC-FUNC-001
+TAGS: software-requirement
+TITLE: ソフトウェア要求：四則演算
+STATEMENT: calcコマンドは、第1引数の演算子としてadd、sub、mul、divのいずれかを、第2引数と第3引数として2つのオペランドを受け取り、指定された演算を実行できなければならない。
+COMMENT: 検証方法：GoogleTestのCalculatorTest.SupportsAllOperationsを実行し、add、sub、mul、divの演算結果が期待値と一致することを確認する。
+RELATIONS:
+- TYPE: Parent
+  VALUE: CALC-SYS-FUNC-001
+
+[REQUIREMENT]
+UID: CALC-FUNC-002
+TAGS: software-requirement
+TITLE: ソフトウェア要求：結果の出力
+STATEMENT: 計算に成功した場合、calcコマンドは数値結果と改行を標準出力へ出力し、終了コード0で終了しなければならない。
+COMMENT: 検証方法：GoogleTestのCliTest.PrintsCalculationResultを実行し、標準出力が期待する数値と改行に一致し、終了コードが0であることを確認する。
+RELATIONS:
+- TYPE: Parent
+  VALUE: CALC-SYS-FUNC-002
+
+[REQUIREMENT]
+UID: CALC-ERR-001
+TAGS: software-requirement
+TITLE: ソフトウェア要求：コマンドライン引数の検証
+STATEMENT: calcコマンドは、引数の個数が3でない場合、演算子がadd、sub、mul、divのいずれでもない場合、またはオペランドが完全な有限数として解釈できない場合に入力を拒否し、説明メッセージを標準エラー出力へ出力して、非0の終了コードで終了しなければならない。
+COMMENT: 検証方法：GoogleTestのCliTest.RejectsWrongArgumentCount、CliTest.RejectsUnknownOperation、およびCliTest.RejectsInvalidOperandsを実行し、標準エラー出力と非0の終了コードを確認する。
+RELATIONS:
+- TYPE: Parent
+  VALUE: CALC-SYS-ERR-001
+
+[REQUIREMENT]
+UID: CALC-ERR-002
+TAGS: software-requirement
+TITLE: ソフトウェア要求：ゼロ除算
+STATEMENT: calcコマンドは、正または負のゼロによる除算を拒否し、説明メッセージを標準エラー出力へ出力して、非0の終了コードで終了しなければならない。
+COMMENT: 検証方法：GoogleTestのCalculatorTest.RejectsDivisionByZeroおよびCliTest.ReportsDivisionByZeroを実行し、正負のゼロ除算が拒否され、説明メッセージと非0の終了コードが得られることを確認する。
+RELATIONS:
+- TYPE: Parent
+  VALUE: CALC-SYS-ERR-002
+
+[REQUIREMENT]
+UID: CALC-ERR-003
+TAGS: software-requirement
+TITLE: ソフトウェア要求：非有限な演算結果
+STATEMENT: calcコマンドは、演算結果が有限数でない場合に計算を拒否し、説明メッセージを標準エラー出力へ出力して、非0の終了コードで終了しなければならない。
+COMMENT: 検証方法：GoogleTestのCliTest.RejectsOverflowingResultを実行し、非有限となる演算結果が拒否され、説明メッセージと非0の終了コードが得られることを確認する。
+RELATIONS:
+- TYPE: Parent
+  VALUE: CALC-SYS-ERR-002
+

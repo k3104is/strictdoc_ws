@@ -44,7 +44,11 @@ ctest --test-dir build --output-on-failure
 
 ## 要求仕様
 
-`docs/requirements.sdoc` で管理し、`strictdoc export docs` で検証します。
+利害関係者要求を `docs/requirements/stakeholder/`、システム要求およびソフトウェア要求を `docs/requirements/systems/<system>/` で管理し、次のコマンドで検証します。
+
+```bash
+strictdoc export docs --output-dir build/strictdoc
+```
 
 ## ライセンス
 
