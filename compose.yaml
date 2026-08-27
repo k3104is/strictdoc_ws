@@ -11,9 +11,9 @@ x-service-common: &service-common
     <<: *environment-common
 
   volumes:
-    - ./workdir:/workdir
+    - .:/workspace
 
-  working_dir: /workdir
+  working_dir: /workspace/projects/calc
   stdin_open: true
   tty: true
   network_mode: host
@@ -56,5 +56,5 @@ services:
       CODEX_HOME: /codex
 
     volumes:
-      - ./workdir:/workdir
+      - .:/workspace
       - ${HOME}/.codex-strictdoc:/codex
