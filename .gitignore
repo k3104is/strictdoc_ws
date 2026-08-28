@@ -1,4 +1,5 @@
 
 # workdir/*
 **/output/
+**/build/
 **/tmp/*
