@@ -1,7 +1,7 @@
 [DOCUMENT]
 TITLE: calc 利害関係者ニーズ
 UID: CALC-STK-NEEDS
-VERSION: 1.1
+VERSION: 1.2
 
 [REQUIREMENT]
 UID: CALC-NEED-001
@@ -35,3 +35,18 @@ STATEMENT: 利用者は、計算を実行できない場合にその理由を把
 RELATIONS:
 - TYPE: Parent
   VALUE: CALC-NEED-001
+
+[REQUIREMENT]
+UID: CALC-NEED-005
+TAGS: stakeholder-need
+TITLE: 利害関係者ニーズ：実行状況と失敗原因の調査
+STATEMENT: 運用担当者は、計算の実行状況および失敗原因を調査したい。
+
+[REQUIREMENT]
+UID: CALC-NEED-006
+TAGS: stakeholder-need
+TITLE: 利害関係者ニーズ：計算ログの確認
+STATEMENT: 運用担当者は、実行された計算のログを確認したい。
+RELATIONS:
+- TYPE: Parent
+  VALUE: CALC-NEED-005
