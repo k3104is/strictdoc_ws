@@ -1,7 +1,7 @@
 [DOCUMENT]
 TITLE: calc CLI システム要求仕様
 UID: CALC-CLI-SYS-REQS
-VERSION: 1.1
+VERSION: 1.3
 
 [GRAMMAR]
 ELEMENTS:
@@ -46,7 +46,7 @@ RATIONALE: 利害関係者要求CALC-STK-001の四則演算を、calc CLIシス�
 COMMENT: 検証方法：システム試験でadd、sub、mul、divに正負および小数のオペランドを与え、指定した各演算の期待値と一致することを確認する。
 RELATIONS:
 - TYPE: Parent
-  VALUE: CALC-STK-001
+  VALUE: CALC-STK-004
 
 [REQUIREMENT]
 UID: CALC-SYS-FUNC-002
@@ -59,7 +59,7 @@ RATIONALE: 利害関係者要求CALC-STK-002を満たし、計算の成否と結
 COMMENT: 検証方法：システム試験で正常な計算を実行し、数値結果が標準出力へ出力され、終了コードが0であることを確認する。
 RELATIONS:
 - TYPE: Parent
-  VALUE: CALC-STK-002
+  VALUE: CALC-STK-004
 
 [REQUIREMENT]
 UID: CALC-SYS-ERR-001
@@ -72,7 +72,7 @@ RATIONALE: 利害関係者要求CALC-STK-003を満たし、処理不能な入力
 COMMENT: 検証方法：システム試験で引数不足、未対応演算子、および不正なオペランドを与え、計算結果が出力されず、理由が標準エラー出力へ出力され、終了コードが非0であることを確認する。
 RELATIONS:
 - TYPE: Parent
-  VALUE: CALC-STK-003
+  VALUE: CALC-STK-004
 
 [REQUIREMENT]
 UID: CALC-SYS-ERR-002
@@ -85,5 +85,5 @@ RATIONALE: 利害関係者要求CALC-STK-003を満たし、無効な計算結果
 COMMENT: 検証方法：システム試験でゼロ除算および結果のオーバーフローを発生させ、計算結果が出力されず、理由が標準エラー出力へ出力され、終了コードが非0であることを確認する。
 RELATIONS:
 - TYPE: Parent
-  VALUE: CALC-STK-003
+  VALUE: CALC-STK-004
 

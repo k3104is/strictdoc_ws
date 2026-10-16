@@ -1,0 +1,37 @@
+[DOCUMENT]
+TITLE: calc 利害関係者ニーズ
+UID: CALC-STK-NEEDS
+VERSION: 1.1
+
+[REQUIREMENT]
+UID: CALC-NEED-001
+TAGS: stakeholder-need
+TITLE: 利害関係者ニーズ：計算結果の把握
+STATEMENT: 利用者は、2つの数値に対する計算の結果を把握したい。
+
+[REQUIREMENT]
+UID: CALC-NEED-002
+TAGS: stakeholder-need
+TITLE: 利害関係者ニーズ：四則演算の利用
+STATEMENT: 利用者は、2つの数値に対して加算、減算、乗算、および除算を行いたい。
+RELATIONS:
+- TYPE: Parent
+  VALUE: CALC-NEED-001
+
+[REQUIREMENT]
+UID: CALC-NEED-003
+TAGS: stakeholder-need
+TITLE: 利害関係者ニーズ：正常結果の確認
+STATEMENT: 利用者は、計算が正常に完了した場合に結果を確認したい。
+RELATIONS:
+- TYPE: Parent
+  VALUE: CALC-NEED-001
+
+[REQUIREMENT]
+UID: CALC-NEED-004
+TAGS: stakeholder-need
+TITLE: 利害関係者ニーズ：失敗理由の把握
+STATEMENT: 利用者は、計算を実行できない場合にその理由を把握したい。
+RELATIONS:
+- TYPE: Parent
+  VALUE: CALC-NEED-001

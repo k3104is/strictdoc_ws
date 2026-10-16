@@ -1,7 +1,7 @@
 [DOCUMENT]
 TITLE: calc 利害関係者要求仕様
 UID: CALC-STK-REQS
-VERSION: 1.1
+VERSION: 1.3
 
 [GRAMMAR]
 ELEMENTS:
@@ -36,32 +36,17 @@ ELEMENTS:
   - TYPE: File
 
 [REQUIREMENT]
-UID: CALC-STK-001
-STATUS: approved
+UID: CALC-STK-004
 TAGS: stakeholder-requirement
-PRIORITY: high
-TITLE: 利害関係者要求：四則演算の利用
-STATEMENT: 利用者は、コマンドラインから2つの数値に対する加算、減算、乗算、および除算を実行できることを求める。
-RATIONALE: 利用者が計算機能を利用するという製品の中心的な目的を実現するため。
-COMMENT: 検証方法：受入試験でadd、sub、mul、divをそれぞれ実行し、4種類すべてで期待した計算結果を得られることを確認する。
-
-[REQUIREMENT]
-UID: CALC-STK-002
-STATUS: approved
-TAGS: stakeholder-requirement
-PRIORITY: high
-TITLE: 利害関係者要求：計算結果の確認
-STATEMENT: 利用者は、計算が成功した場合に、その結果を確認できることを求める。
-RATIONALE: 演算結果を利用者が確認できなければ、計算機能が利用者へ価値を提供できないため。
-COMMENT: 検証方法：受入試験で正常な計算を実行し、利用者が標準出力から計算結果を確認できることを確認する。
-
-[REQUIREMENT]
-UID: CALC-STK-003
-STATUS: approved
-TAGS: stakeholder-requirement
-PRIORITY: high
-TITLE: 利害関係者要求：異常の把握
-STATEMENT: 利用者は、入力または計算に問題がある場合に、処理が失敗したこととその理由を把握できることを求める。
-RATIONALE: 利用者が入力を修正するか計算条件を見直すかを判断できるようにするため。
-COMMENT: 検証方法：受入試験で不正入力、ゼロ除算、および結果のオーバーフローを発生させ、各場合で失敗理由を確認できることを確認する。
-
+TITLE: 利害関係者要求：計算の実行結果の把握
+STATEMENT: 利用者は、コマンドラインから2つの数値に対する加算、減算、乗算、および除算を実行し、計算が正常に完了した場合は結果を、実行できない場合はその理由を把握できることを求める。
+COMMENT: 検証方法：受入試験でadd、sub、mul、divの正常な計算および実行できない計算を行い、正常時は期待する結果を、異常時は理由を利用者が確認できることを確認する。
+RELATIONS:
+- TYPE: Parent
+  VALUE: CALC-NEED-001
+- TYPE: Parent
+  VALUE: CALC-NEED-002
+- TYPE: Parent
+  VALUE: CALC-NEED-003
+- TYPE: Parent
+  VALUE: CALC-NEED-004
