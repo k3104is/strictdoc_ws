@@ -89,24 +89,24 @@ RELATIONS:
 
 [REQUIREMENT]
 UID: CALC-SYS-LOG-001
-STATUS: draft
+STATUS: approved
 TAGS: system-requirement
 PRIORITY: medium
 TITLE: システム要求：計算ログの記録
-STATEMENT: システムは、計算要求ごとに実行時刻、計算内容、および計算結果を、異常時は実行時刻と異常内容を計算ログへ記録しなければならない。
+STATEMENT: システムは、計算要求ごとに実行環境のローカル時刻を使用し、正常時は時刻、計算内容、および計算結果を、異常時は時刻、ERROR、および異常内容を1行の計算ログとして記録しなければならない。
 RATIONALE: CALC-STK-005を満たすため、計算後の調査に必要な実行状況と失敗原因を残す必要がある。
-COMMENT: 検証方法：システム試験で正常な計算、入力異常、および計算異常を発生させ、正常時は実行時刻、計算内容、および計算結果、異常時は実行時刻と異常内容が計算ログに記録されることを確認する。
+COMMENT: 検証方法：システム試験で正常な計算、入力異常、および計算異常を発生させ、正常時はHH:MM:SS、計算内容、計算結果が、異常時はHH:MM:SS、ERROR、異常内容が各1行で計算ログに記録されることを確認する。
 RELATIONS:
 - TYPE: Parent
   VALUE: CALC-STK-005
 
 [REQUIREMENT]
 UID: CALC-SYS-LOG-002
-STATUS: draft
+STATUS: approved
 TAGS: system-requirement
 PRIORITY: medium
 TITLE: システム要求：計算ログの提示
-STATEMENT: システムは、運用担当者から要求された場合に、記録した計算ログを提示しなければならない。
+STATEMENT: システムは、運用担当者から日付を指定して要求された場合に、指定日の計算ログを標準出力へ提示しなければならない。
 RATIONALE: CALC-STK-005を満たすため、記録された情報を運用担当者が確認できる必要がある。
 COMMENT: 検証方法：システム試験で複数の正常および失敗する計算を実行した後に計算ログの提示を要求し、記録された各計算の実行状況と失敗理由を確認できることを確認する。
 RELATIONS:
@@ -115,13 +115,13 @@ RELATIONS:
 
 [REQUIREMENT]
 UID: CALC-SYS-LOG-003
-STATUS: draft
+STATUS: approved
 TAGS: system-requirement
 PRIORITY: medium
 TITLE: システム要求：ログ入出力異常の通知
-STATEMENT: システムは、計算ログの保存先であるlogディレクトリが存在しない場合、または計算ログの書き込みもしくは読み込みに失敗した場合、その異常内容を標準出力で通知しなければならない。
+STATEMENT: システムは、logディレクトリが存在しない場合または計算ログの読み書きに失敗した場合、その異常内容を標準出力へ通知して非0で終了しなければならない。ログ書き込みに失敗した場合は計算結果を出力してはならない。
 RATIONALE: ログを記録または提示できない状態を利用者または運用担当者が把握できるようにするため。
-COMMENT: 検証方法：システム試験でlogディレクトリが存在しない状態、計算ログを書き込めない状態、および読み込めない状態を発生させ、それぞれの異常内容が標準出力へ出力されることを確認する。
+COMMENT: 検証方法：システム試験でlogディレクトリの不存在、書き込み失敗、および読み込み失敗を発生させ、異常内容が標準出力へ出力され、計算結果が出力されず、終了コードが非0であることを確認する。
 RELATIONS:
 - TYPE: Parent
   VALUE: CALC-STK-005

@@ -56,7 +56,7 @@ RELATIONS:
 
 [REQUIREMENT]
 UID: CALC-STK-005
-STATUS: draft
+STATUS: approved
 TAGS: stakeholder-requirement
 PRIORITY: medium
 TITLE: 利害関係者要求：計算ログの確認

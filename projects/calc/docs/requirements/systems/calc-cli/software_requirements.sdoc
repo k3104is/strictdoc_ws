@@ -102,11 +102,11 @@ RELATIONS:
 
 [REQUIREMENT]
 UID: CALC-LOG-001
-STATUS: draft
+STATUS: approved
 TAGS: software-requirement
 PRIORITY: medium
 TITLE: ソフトウェア要求：日付別ログファイルへの追記
-STATEMENT: calcコマンドは、実行日のログをlog/YYYY-MM-DD.logへ記録し、対象日のファイルが存在しない場合は自動生成し、存在する場合は既存内容を保持して新しいログを追記しなければならない。
+STATEMENT: calcコマンドは、実行環境のローカル日付を使用して実行日のログをlog/YYYY-MM-DD.logへ記録し、対象日のファイルが存在しない場合は自動生成し、存在する場合は既存内容を保持して新しいログを追記しなければならない。
 RATIONALE: システム要求CALC-SYS-LOG-001を、日付単位で継続的に保存できるファイル構成として具体化するため。
 COMMENT: 検証方法：CLI試験で同じ日に複数の計算を実行し、log/YYYY-MM-DD.logが自動生成され、既存記録を保持したまま実行回数分の記録が追記されることを確認する。
 RELATIONS:
@@ -115,24 +115,24 @@ RELATIONS:
 
 [REQUIREMENT]
 UID: CALC-LOG-002
-STATUS: draft
+STATUS: approved
 TAGS: software-requirement
 PRIORITY: medium
 TITLE: ソフトウェア要求：計算ログの記録形式
-STATEMENT: calcコマンドは、正常時には実行時刻、計算内容、および計算結果を、異常時には実行時刻と異常内容を、それぞれ1回の計算につき1行で対応する実行日のログファイルへ記録しなければならない。
+STATEMENT: calcコマンドは、正常時には「HH:MM:SS | <左辺> <演算子記号> <右辺> | <結果>」、異常時には「HH:MM:SS | ERROR | <異常内容>」の形式で、1回の計算につき1行を実行日のログファイルへ記録しなければならない。演算子記号はaddを+、subを-、mulを*、divを/として記録しなければならない。
 RATIONALE: システム要求CALC-SYS-LOG-001で必要な正常時と異常時の情報を、ログレコードとして具体化するため。
-COMMENT: 検証方法：CLI試験で正常な計算、入力異常、および計算異常を実行し、正常時のレコードに実行時刻、計算内容、および計算結果が、異常時のレコードに実行時刻と異常内容が、それぞれ1回の計算につき1行で記録されることを確認する。
+COMMENT: 検証方法：CLI試験でadd、sub、mul、divの正常な計算、入力異常、および計算異常を実行し、正常ログと異常ログが規定の区切り、HH:MM:SS、演算子記号、および1計算1行の形式に一致することを確認する。
 RELATIONS:
 - TYPE: Parent
   VALUE: CALC-SYS-LOG-001
 
 [REQUIREMENT]
 UID: CALC-LOG-003
-STATUS: draft
+STATUS: approved
 TAGS: software-requirement
 PRIORITY: medium
 TITLE: ソフトウェア要求：計算ログの読み込みと出力
-STATEMENT: calcコマンドは、計算ログの提示を要求された場合、logディレクトリ内の日付別ログファイルを読み込み、その内容を出力しなければならない。
+STATEMENT: calcコマンドは、「calc log YYYY-MM-DD」が実行された場合、log/YYYY-MM-DD.logを読み込み、その内容を標準出力へ出力しなければならない。
 RATIONALE: システム要求CALC-SYS-LOG-002を、日付別ログファイルの読み込みとCLI出力として具体化するため。
 COMMENT: 検証方法：CLI試験で正常および異常な計算のログを作成した後にログ提示を要求し、日付別ログファイルの内容と出力内容が一致することを確認する。
 RELATIONS:
@@ -141,13 +141,13 @@ RELATIONS:
 
 [REQUIREMENT]
 UID: CALC-LOG-004
-STATUS: draft
+STATUS: approved
 TAGS: software-requirement
 PRIORITY: medium
 TITLE: ソフトウェア要求：ログ入出力失敗の通知
-STATEMENT: calcコマンドは、保存先のlogディレクトリが存在しない場合、またはログファイルの書き込みもしくは読み込みに失敗した場合、異常内容を標準出力へ出力しなければならない。
+STATEMENT: calcコマンドは、logディレクトリが存在しない場合またはログファイルの読み書きに失敗した場合、異常内容を標準出力へ出力して非0で終了しなければならない。ログ書き込みに失敗した場合は計算結果を標準出力へ出力してはならない。
 RATIONALE: システム要求CALC-SYS-LOG-003を、ログファイル入出力失敗時のCLI出力として具体化するため。
-COMMENT: 検証方法：CLI試験でlogディレクトリが存在しない状態、書き込み不能なログファイル、および読み込み不能なログファイルを使用し、それぞれの異常内容が標準出力へ出力されることを確認する。
+COMMENT: 検証方法：CLI試験でlogディレクトリの不存在、書き込み不能なログファイル、および「calc log YYYY-MM-DD」による読み込み失敗を発生させ、異常内容が標準出力へ出力され、計算結果が出力されず、終了コードが非0であることを確認する。
 RELATIONS:
 - TYPE: Parent
   VALUE: CALC-SYS-LOG-003
