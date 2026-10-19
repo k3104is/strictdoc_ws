@@ -1,7 +1,7 @@
 [DOCUMENT]
 TITLE: calc 利害関係者要求仕様
 UID: CALC-STK-REQS
-VERSION: 1.4
+VERSION: 1.5
 
 [GRAMMAR]
 ELEMENTS:
@@ -59,12 +59,14 @@ UID: CALC-STK-005
 STATUS: approved
 TAGS: stakeholder-requirement
 PRIORITY: medium
-TITLE: 利害関係者要求：計算ログの確認
-STATEMENT: 運用担当者は、実行された計算の実行状況および失敗原因を計算ログから確認できることを求める。
-RATIONALE: 運用担当者が計算後に実行状況および失敗原因を調査できるようにするため。
-COMMENT: 検証方法：受入試験で正常な計算および失敗する計算を実行した後、運用担当者が計算ログから各計算の実行状況と失敗原因を確認できることを確認する。
+TITLE: 利害関係者要求：計算履歴の記録と確認
+STATEMENT: 運用担当者は、実行された計算の実行状況および失敗原因が記録され、計算ログから確認できることを求める。
+RATIONALE: 運用担当者が計算後に実行状況および失敗原因を調査できるよう、調査に必要な情報を残して確認可能にするため。
+COMMENT: 検証方法：受入試験で正常な計算および失敗する計算を実行し、各計算の実行状況と失敗原因が記録され、運用担当者が計算ログから確認できることを確認する。
 RELATIONS:
 - TYPE: Parent
   VALUE: CALC-NEED-005
 - TYPE: Parent
   VALUE: CALC-NEED-006
+- TYPE: Parent
+  VALUE: CALC-NEED-007
